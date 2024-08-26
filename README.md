@@ -12,7 +12,7 @@ This template uses the following technologies and frameworks:
 - **[Tailwind CSS](https://tailwindcss.com/)**: A utility-first CSS framework for designing custom user interfaces.
 - **[shadcn](https://shadcn.dev/)**: A collection of UI components for building beautiful interfaces.
 - **[Yarn](https://yarnpkg.com/)**: A fast and reliable package manager.
-- **[Prisma](https://www.prisma.io/)**: An ORM for interacting with databases. This template uses SQLite for development. For production environments, PostgreSQL is recommended as Vercel does not support SQLite.
+- **[Prisma](https://www.prisma.io/)**: An ORM for interacting with databases. For production environments, PostgreSQL is recommended as Vercel does not support SQLite.
 
 ## Getting Started
 
@@ -53,7 +53,7 @@ To get started with the Zaini Template, follow these steps:
 
 ## Notes
 
-- **Production Database**: For production, switch from SQLite to PostgreSQL as Vercel does not support SQLite.
+- **Production Database**: ~~For production, switch from SQLite to PostgreSQL as Vercel does not support SQLite.~~ This template uses PostgreSQL by default. You can use [dumbgress](https://github.com/zaini/dumbgres) to easily set up local PostgreSQL databases for development. There is a branch for this repo which uses SQLite if you prefer that.
 - **Seed File**: The `seed.ts` file is included to help you seed the database with initial data.
 
 ## Useful Links
