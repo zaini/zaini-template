@@ -19,7 +19,10 @@ const PostList = (props: PostListProps) => {
             post.title.toLowerCase().includes(search.toLowerCase()) ||
             post.content.toLowerCase().includes(search.toLowerCase())
         );
-    });
+    }).sort((a, b) => {
+        return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    }
+    );
 
     return (
         <div className="p-4">

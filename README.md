@@ -2,6 +2,8 @@
 
 Welcome to the Zaini Template! This starter template is set up with a modern stack of technologies to help you kickstart your web development projects. Below you'll find all the necessary information to get started, including the technologies used, setup instructions, and useful links.
 
+![example screenshot](./media/example-screenshot.png)
+
 ## Technologies Used
 
 This template uses the following technologies and frameworks:
@@ -13,6 +15,7 @@ This template uses the following technologies and frameworks:
 - **[shadcn](https://shadcn.dev/)**: A collection of UI components for building beautiful interfaces.
 - **[Yarn](https://yarnpkg.com/)**: A fast and reliable package manager.
 - **[Prisma](https://www.prisma.io/)**: An ORM for interacting with databases. For production environments, PostgreSQL is recommended as Vercel does not support SQLite.
+- **[Auth.js](https://authjs.dev/getting-started)**: A library for adding authentication to your applications. (still in beta apparently?)
 
 ## Getting Started
 
