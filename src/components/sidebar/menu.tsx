@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Ellipsis, LogOut } from "lucide-react";
+import { Ellipsis, Loader2, LogIn, LogOut } from "lucide-react";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
@@ -15,14 +15,19 @@ import {
 } from "@/components/ui/tooltip";
 import { CollapseMenuButton } from "./collapse-menu-button";
 import { getMenuList } from "./menu-list";
+import { signIn, signOut, useSession } from "next-auth/react"
 
 interface MenuProps {
   isOpen: boolean | undefined;
 }
 
 export function Menu({ isOpen }: MenuProps) {
+  const session = useSession();
   const pathname = usePathname();
   const menuList = getMenuList(pathname, false);
+
+  const isSignedIn = session.status === "authenticated";
+  const isSignedOut = session.status === "unauthenticated";
 
   return (
     <ScrollArea className="[&>div>div[style]]:!block">
@@ -108,12 +113,25 @@ export function Menu({ isOpen }: MenuProps) {
               <Tooltip delayDuration={100}>
                 <TooltipTrigger asChild>
                   <Button
-                    onClick={() => { }}
+                    onClick={() => {
+                      if (isSignedIn) {
+                        signOut();
+                      } else if (isSignedOut) {
+                        // you can change the provider or provide no provider so it takes them to a login page to chose their own provider
+                        signIn("github");
+                      }
+                    }}
                     variant="outline"
                     className="w-full justify-center h-10 mt-5"
                   >
                     <span className={cn(isOpen === false ? "" : "mr-4")}>
-                      <LogOut size={18} />
+                      {
+                        isSignedIn
+                          ? <LogOut size={18} />
+                          : isSignedOut
+                            ? <LogIn size={18} />
+                            : <Loader2 size={18} />
+                      }
                     </span>
                     <p
                       className={cn(
@@ -121,12 +139,26 @@ export function Menu({ isOpen }: MenuProps) {
                         isOpen === false ? "opacity-0 hidden" : "opacity-100"
                       )}
                     >
-                      Sign out
+                      {
+                        isSignedIn
+                          ? "Sign out"
+                          : isSignedOut
+                            ? "Sign in"
+                            : "Loading..."
+                      }
                     </p>
                   </Button>
                 </TooltipTrigger>
                 {isOpen === false && (
-                  <TooltipContent side="right">Sign out</TooltipContent>
+                  <TooltipContent side="right">
+                    {
+                      isSignedIn
+                        ? "Sign out"
+                        : isSignedOut
+                          ? "Sign in"
+                          : "Loading..."
+                    }
+                  </TooltipContent>
                 )}
               </Tooltip>
             </TooltipProvider>

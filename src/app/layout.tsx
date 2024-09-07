@@ -3,6 +3,7 @@ import { Inter as FontSans } from "next/font/google"
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import AppLayout from "@/components/app-layout";
+import { SessionProvider } from "next-auth/react";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -22,9 +23,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn("font-sans antialiased", fontSans.variable)}>
-        <AppLayout>
-          {children}
-        </AppLayout>
+        <SessionProvider>
+          <AppLayout>
+            {children}
+          </AppLayout>
+        </SessionProvider>
       </body>
     </html>
   );
